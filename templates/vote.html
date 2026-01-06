@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Isoloir Numérique</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+        .step { background: #e9ecef; padding: 15px; margin-bottom: 15px; border-left: 5px solid #007bff; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; }
+        button { padding: 10px 20px; background: #28a745; color: white; border: none; cursor: pointer; font-size: 16px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Isoloir - {{ voter.name }}</h1>
+    <p>Code N1: <code>{{ voter.n1 }}</code> (Sera vérifié par l'Admin)</p>
+    <p>Code N2: <code>{{ voter.n2 }}</code> (Sera inclus dans le bulletin)</p>
+
+    <form action="/submit_vote/{{ voter.id }}" method="post">
+        <div class="step">
+            <h3>Faites votre choix</h3>
+            <label>Candidat :</label>
+            <select name="choix">
+                <option value="Alice">Alice</option>
+                <option value="Bob">Bob</option>
+                <option value="Charlie">Charlie</option>
+            </select>
+        </div>
+        
+        <div class="step">
+            <h3>Simulation Logicielle</h3>
+            <p>En cliquant sur "Voter", le logiciel va automatiquement :</p>
+            <ol>
+                <li>Contacter l'Admin avec N1.</li>
+                <li>Masquer le bulletin (Blinding).</li>
+                <li>Obtenir la signature aveugle de l'Admin.</li>
+                <li>Démasquer la signature (Unblinding).</li>
+                <li>Chiffrer le tout pour le Décompteur.</li>
+                <li>Envoyer à l'Anonymiseur.</li>
+            </ol>
+        </div>
+
+        <button type="submit">Confirmer et Voter</button>
+    </form>
+</body>
+</html>

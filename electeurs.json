@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "name": "Citoyen 1",
+        "n1": "4F5BE0AA8280",
+        "n2": "D1E362180EC7",
+        "has_voted": false
+    },
+    {
+        "id": 2,
+        "name": "Citoyen 2",
+        "n1": "7D26A86233EB",
+        "n2": "BFE8707F941A",
+        "has_voted": false
+    },
+    {
+        "id": 3,
+        "name": "Citoyen 3",
+        "n1": "8CF53F0B0BE2",
+        "n2": "EAFE4AC815F4",
+        "has_voted": false
+    },
+    {
+        "id": 4,
+        "name": "Citoyen 4",
+        "n1": "393F9CED0F83",
+        "n2": "6665F71A729D",
+        "has_voted": false
+    },
+    {
+        "id": 5,
+        "name": "Citoyen 5",
+        "n1": "1DB4EE7A5CE4",
+        "n2": "233C23F3AD27",
+        "has_voted": false
+    }
+]

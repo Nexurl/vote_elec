@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Vote Électronique - Protocole Sécurisé</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: auto; padding: 20px; background: #f4f4f4; }
+        .card { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { color: #333; }
+        .btn { display: inline-block; padding: 10px 15px; background: #007bff; color: white; text-decoration: none; border-radius: 4px; margin-top: 10px; }
+        .btn-danger { background: #dc3545; }
+        .btn-success { background: #28a745; }
+        code { background: #eee; padding: 2px 5px; border-radius: 3px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 8px; text-align: left; border-bottom: 1px solid #ddd; }
+        .logs { background: #222; color: #0f0; padding: 15px; font-family: monospace; height: 200px; overflow-y: scroll; }
+    </style>
+</head>
+<body>
+    <h1>Système de Vote Électronique</h1>
+    
+    <div class="card">
+        <h2>1. Espace Électeur (Simulation Client)</h2>
+        <p>Sélectionnez un électeur pour simuler le processus depuis son ordinateur.</p>
+        <table>
+            <tr><th>ID</th><th>Nom</th><th>N1 (Public)</th><th>N2 (Secret)</th><th>Statut</th><th>Action</th></tr>
+            {% for v in voters %}
+            <tr>
+                <td>{{ v.id }}</td>
+                <td>{{ v.name }}</td>
+                <td>{{ v.n1 }}</td>
+                <td><code>Masqué</code></td>
+                <td>{% if v.has_voted %}Voté{% else %}Non voté{% endif %}</td>
+                <td>
+                    {% if not v.has_voted %}
+                    <a href="/vote_ui/{{ v.id }}" class="btn">Voter</a>
+                    {% else %}
+                    -
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <a href="/reset" class="btn btn-danger">Réinitialiser le Scrutin</a>
+    </div>
+
+    <div class="card">
+        <h2>2. État du système</h2>
+        <p><strong>Urne (Anonymiseur) :</strong> {{ urne_count }} bulletins chiffrés.</p>
+        <p><strong>Clé Publique Admin (e, n) :</strong> ({{ admin_key[0] }}, ...)</p>
+        <p><strong>Clé Publique Décompteur (e, n) :</strong> ({{ teller_key[0] }}, ...)</p>
+    </div>
+
+    <div class="card">
+        <h2>3. Dépouillement (Décompteur)</h2>
+        <form action="/depouiller" method="post">
+            <button type="submit" class="btn btn-success">Lancer le dépouillement</button>
+        </form>
+        {% if resultats %}
+            <h3>Résultats :</h3>
+            <ul>
+            {% for choix, count in resultats.items() %}
+                <li><strong>{{ choix }}</strong> : {{ count }} voix</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        
+        {% if logs %}
+            <h3>Logs du dépouillement :</h3>
+            <div class="logs">
+                {% for log in logs %}
+                {{ log }}<br>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
