@@ -1,4 +1,4 @@
-# Vote electonique par Gaston PLOT
+# Vote électonique par Gaston PLOT
 
 Ce dépôt est le résultat mon implémentation du système de vote selon le sujet de  [TD vote électronique](TD_vote_électronique_2025.pdf)
 
@@ -27,5 +27,5 @@ Vous pouvez ensuite exécuter le script ``app.py`` se situant à la racine du d�
 ## Désactivation du venv
 
 Pensez bien à exécuter le script de désactivation pour retourner à votre état initial.  
-Windows -> desactivate.bat  
-Linux -> desactivate.sh
+Windows -> deactivate.bat  
+Linux -> deactivate.sh
